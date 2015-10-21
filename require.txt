@@ -1,0 +1,55 @@
+一. <script src="js/require.js" data-main="js/main"></script>
+
+二. 按照AMD的规范来定义模块
+  
+1. 如果没有依赖模块：
+define(function(){
+   var add = function(a+b){
+      return a+b
+   }
+   return {
+      add : add
+   }
+})
+
+
+2. 如果依赖其它模块
+define(['jquery','math'],function($,math){
+    $('body').html(math.add(3,4))
+    return {
+       dd: dd
+    }
+})
+
+
+三. 加载规范的模块
+
+require(['moduleA', 'moduleB', 'moduleC'], function (moduleA, moduleB, moduleC){
+   // moduleA
+})
+
+四.加载非规范的模块
+
+require.config({
+
+    baseUrl: "js/lib",
+
+　　paths: {
+　　　　　　"jquery": "jquery.min",
+　　　　　　"underscore": "underscore.min",
+　　　　　　"backbone": "backbone.min"
+　　　　}
+
+    shim: {
+
+　　　　　　'underscore':{
+　　　　　　　　exports: '_'
+　　　　　　},
+
+　　　　　　'backbone': {
+　　　　　　　　deps: ['underscore', 'jquery'],
+　　　　　　　　exports: 'Backbone'
+　　　　　　}
+　　　　}
+ 
+})
